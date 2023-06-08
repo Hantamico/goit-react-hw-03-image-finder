@@ -50,7 +50,7 @@ export default class ImageGallery extends Component {
     onImageClick = e => {
         this.toggleModal();
         console.log(e.target.id);
-        this.setState({largeImage: this.state.imagesList.filter(image => image.id == e.target.id)})
+        this.setState({largeImage: this.state.imagesList.filter(image => Number(image.id) === Number(e.target.id))})
     }
 
     render() {
