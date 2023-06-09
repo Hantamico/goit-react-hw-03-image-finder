@@ -23,12 +23,16 @@ export default class ImageGallery extends Component {
 
         if (prevProps.query !== this.props.query) {
             
-            this.setState({ status: "pending", page: 1, })
-            fetchImagesByName(this.props.query, this.state.page)
+            this.setState({ page: 1, status: "pending", })
+
+            setTimeout(() => {
+                fetchImagesByName(this.props.query, this.state.page)
                 .then(imagesList => this.setState(prevState => {
                     return{ page: prevState.page + 1, imagesList: imagesList.hits, totalHits: imagesList.totalHits, status: "resolved" }
                 }))
                 .catch(error => this.setState({ error, status: "rejected" }))
+            }, 250);
+            
         };
     };
     
